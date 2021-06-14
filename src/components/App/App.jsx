@@ -1,4 +1,4 @@
-import Autocomplete from '../Autocomplete';
+import AutocompleteContainer from '../../containers/AutocompleteContainer';
 
 import './App.css';
 
@@ -8,7 +8,7 @@ const App = () => (
       Movies Autocomplete
     </header>
     <section>
-      <Autocomplete />
+      <AutocompleteContainer />
     </section>
   </main>
 );
