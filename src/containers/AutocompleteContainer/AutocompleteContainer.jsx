@@ -6,13 +6,15 @@ import { getMoviesByQuery } from '../../services/api';
 import { API_KEY } from '../../constants';
 import { getMappedResponse } from '../../mapper/moviesMapper';
 
+import './AutocompleteContainer.css';
+
 const AutocompleteContainer = () => {
   // API query text
   const [queryText, setQueryText] = useState('');
   // API search results
   const [results, setResults] = useState([]);
   // Searching status (whether there is a pending API request)
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   // Error status (whether the API request has failed)
   const [error, setError] = useState(null);
   // Whether results should be displayed
@@ -44,6 +46,7 @@ const AutocompleteContainer = () => {
   const handleKeyDown = ({ keyCode }) => {
     if (keyCode === 13) {
       setShowResults(false);
+      // handle selection here
       setActiveResult(0);
     }
     // User pressed the up arrow, increment the index
@@ -60,6 +63,13 @@ const AutocompleteContainer = () => {
       }
       setActiveResult(activeResult => activeResult + 1 );
     }
+  };
+
+  const handleMouseOver = (index) => (_e) => {
+    if (index < 0 || index >= results.length) {
+      return;
+    }
+    setActiveResult(index);
   };
 
   // Effect for triggering debounced API call
@@ -109,13 +119,19 @@ const AutocompleteContainer = () => {
             <div>Loading...</div>
           ) : (
             results.length ? (
-              results.map(result => (
-                <div key={result.imdbID} className={`AutocompleteContainer__result${activeResult ? ' active' : ''}`}>
+              results.map((result, index) => (
+                <div
+                  key={result.imdbID}
+                  className={`AutocompleteContainer__result${activeResult === index ? ' active' : ''}`}
+                  onMouseOver={handleMouseOver(index)}
+                >
                   <h4>{result.Title}</h4>
                 </div>
               ))
             ) : (
-              <div className="AutocompleteContainer__no-result">No results found for your search. Please try a different title.</div>
+              debouncedQueryText && (
+                <div className="AutocompleteContainer__no-result">No results found for your search. Please try a different title.</div>
+              )
             )
           )}
         </div>

@@ -14,8 +14,8 @@
 
 }
 
-.AutocompleteContainer__result .active {
-
+.AutocompleteContainer__result.active {
+  color: red;
 }
 
 .AutocompleteContainer__no-result {

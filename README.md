@@ -42,3 +42,5 @@ Your app is ready to be deployed!
 Add environment-specific variables to the `.env.development` file for dev/local enviroment.
 
 For production, use `.env.production` file.
+
+NOTE: Please set your API key in environment variables before running the app.
