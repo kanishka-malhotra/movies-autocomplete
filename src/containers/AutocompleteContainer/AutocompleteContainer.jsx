@@ -75,10 +75,11 @@ const AutocompleteContainer = () => {
   // Effect for triggering debounced API call
   useEffect(
     () => {
-      if (debouncedQueryText) {
+      const trimmedQueryText = debouncedQueryText.trim();
+      if (trimmedQueryText) {
         setLoading(true);
         setShowResults(true);
-        getMoviesByQuery(`?apikey=${API_KEY}&s=${debouncedQueryText}`)
+        getMoviesByQuery(`?apikey=${API_KEY}&s=${trimmedQueryText}`)
           .then(response => setResults(getMappedResponse(response)))
           .catch(() => {
             setError(true);
