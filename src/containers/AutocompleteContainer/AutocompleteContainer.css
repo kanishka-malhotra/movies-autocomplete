@@ -6,6 +6,18 @@
 
 }
 
-.AutocompleteContainer__suggestions {
+.AutocompleteContainer__results {
+
+}
+
+.AutocompleteContainer__result {
+
+}
+
+.AutocompleteContainer__result .active {
+
+}
+
+.AutocompleteContainer__no-result {
 
 }
